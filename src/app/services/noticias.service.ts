@@ -10,7 +10,7 @@ export class NoticiasService {
     private httpClient: HttpClient
   ) { }
 
-  list(filters: {})  {
-    return this.httpClient.get('http://servicodados.ibge.gov.br/api/v3/noticias?qtd=10');
+  list(filters: any)  {
+    return this.httpClient.get('http://servicodados.ibge.gov.br/api/v3/noticias?qtd=10&introsize=110&page='+filters.page);
   }
 }

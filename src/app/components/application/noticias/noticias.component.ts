@@ -17,6 +17,12 @@ import {NzTypographyComponent} from "ng-zorro-antd/typography";
 import {NzBadgeComponent} from "ng-zorro-antd/badge";
 import {NzTagComponent} from "ng-zorro-antd/tag";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {PaginationInterface} from "../../../models/pagination.interface";
+import {NzPaginationComponent} from "ng-zorro-antd/pagination";
+import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
+import {NzFlexDirective} from "ng-zorro-antd/flex";
+import {FormsModule} from "@angular/forms";
+import {NzSkeletonComponent} from "ng-zorro-antd/skeleton";
 
 @Component({
   selector: 'app-noticias',
@@ -40,22 +46,54 @@ import {NzDividerComponent} from "ng-zorro-antd/divider";
     NzBadgeComponent,
     NzTagComponent,
     NgIf,
-    NzDividerComponent
+    NzDividerComponent,
+    NzPaginationComponent,
+    NzRowDirective,
+    NzColDirective,
+    NzFlexDirective,
+    FormsModule,
+    NzSkeletonComponent
   ],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'
 })
 export class NoticiasComponent {
+  public loading: boolean = true;
   public noticias : NoticiaInterface[] | undefined;
+  public paginacao: PaginationInterface = {
+    count: 0,
+    items: [],
+    nextPage: 0,
+    page: 1,
+    previousPage: 0,
+    showingFrom: 0,
+    showingTo: 0,
+    totalPages: 0
+  };
+
   constructor(
     private noticiasService: NoticiasService
   ) {
   }
 
   ngOnInit() {
-    this.noticiasService.list({}).subscribe((response : any) => {
-      this.noticias = response.items
-      console.log(this.noticias)
+    this.paginacao.page = 1
+    this.list()
+  }
+
+  list() {
+    this.loading = true
+    this.noticiasService.list({
+      page: this.paginacao.page
+    }).subscribe((response : any) => {
+      this.paginacao = response
+      this.noticias = this.paginacao.items
+      setTimeout(() => {this.loading = false}, 2000)
     })
+  }
+
+  changePage(newPageNumber : number) {
+    this.paginacao.page = newPageNumber;
+    this.list()
   }
 }
