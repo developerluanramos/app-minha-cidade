@@ -1,8 +1,10 @@
 <div>
-  <h4>Notícias</h4>
+  <nz-divider nzOrientation="left" nzText="Notícias"></nz-divider>
   <nz-card nzHoverable *ngFor="let noticia of noticias">
     <small *ngIf="noticia.destaque"><nz-tag [nzColor]="'green'">{{ 'Destaque' }}</nz-tag></small>
-    <nz-card-meta nzTitle="{{ noticia.titulo }}"></nz-card-meta>
+    <h4>{{noticia.titulo}}</h4>
+    <small>{{noticia.introducao}}</small>
+    <br/>
     <small>{{ noticia.data_publicacao }}</small>
   </nz-card>
 </div>

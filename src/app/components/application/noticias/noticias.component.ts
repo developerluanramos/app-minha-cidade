@@ -16,6 +16,7 @@ import {NzCardComponent, NzCardMetaComponent} from "ng-zorro-antd/card";
 import {NzTypographyComponent} from "ng-zorro-antd/typography";
 import {NzBadgeComponent} from "ng-zorro-antd/badge";
 import {NzTagComponent} from "ng-zorro-antd/tag";
+import {NzDividerComponent} from "ng-zorro-antd/divider";
 
 @Component({
   selector: 'app-noticias',
@@ -38,7 +39,8 @@ import {NzTagComponent} from "ng-zorro-antd/tag";
     DatePipe,
     NzBadgeComponent,
     NzTagComponent,
-    NgIf
+    NgIf,
+    NzDividerComponent
   ],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'
