@@ -24,6 +24,7 @@ import {NzFlexDirective} from "ng-zorro-antd/flex";
 import {FormsModule} from "@angular/forms";
 import {NzSkeletonComponent} from "ng-zorro-antd/skeleton";
 import {NzRadioComponent, NzRadioGroupComponent} from "ng-zorro-antd/radio";
+import {PaginatorComponent} from "../../ui/paginator/paginator.component";
 
 @Component({
   selector: 'app-noticias',
@@ -55,7 +56,8 @@ import {NzRadioComponent, NzRadioGroupComponent} from "ng-zorro-antd/radio";
     FormsModule,
     NzSkeletonComponent,
     NzRadioGroupComponent,
-    NzRadioComponent
+    NzRadioComponent,
+    PaginatorComponent
   ],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'
@@ -64,16 +66,7 @@ export class NoticiasComponent {
   public tipo: string = "noticia";
   public loading: boolean = true;
   public noticias : NoticiaInterface[] | undefined;
-  public paginacao: PaginationInterface = {
-    count: 0,
-    items: [],
-    nextPage: 0,
-    page: 1,
-    previousPage: 0,
-    showingFrom: 0,
-    showingTo: 0,
-    totalPages: 0
-  };
+  public paginacao: PaginationInterface = {};
 
   constructor(
     private noticiasService: NoticiasService
@@ -86,7 +79,6 @@ export class NoticiasComponent {
   }
 
   list() {
-    console.log('TESTE', this.tipo)
     this.loading = true
     this.noticiasService.list({
       page: this.paginacao.page,
@@ -98,7 +90,7 @@ export class NoticiasComponent {
     })
   }
 
-  changePage(novaPagina : number) {
+  changePage(novaPagina: number | undefined) {
     this.paginacao.page = novaPagina;
     this.list()
   }
