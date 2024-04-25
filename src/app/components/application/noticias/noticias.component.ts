@@ -23,6 +23,7 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzFlexDirective} from "ng-zorro-antd/flex";
 import {FormsModule} from "@angular/forms";
 import {NzSkeletonComponent} from "ng-zorro-antd/skeleton";
+import {NzRadioComponent, NzRadioGroupComponent} from "ng-zorro-antd/radio";
 
 @Component({
   selector: 'app-noticias',
@@ -52,12 +53,15 @@ import {NzSkeletonComponent} from "ng-zorro-antd/skeleton";
     NzColDirective,
     NzFlexDirective,
     FormsModule,
-    NzSkeletonComponent
+    NzSkeletonComponent,
+    NzRadioGroupComponent,
+    NzRadioComponent
   ],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'
 })
 export class NoticiasComponent {
+  public tipo: string = "noticia";
   public loading: boolean = true;
   public noticias : NoticiaInterface[] | undefined;
   public paginacao: PaginationInterface = {
@@ -82,9 +86,11 @@ export class NoticiasComponent {
   }
 
   list() {
+    console.log('TESTE', this.tipo)
     this.loading = true
     this.noticiasService.list({
-      page: this.paginacao.page
+      page: this.paginacao.page,
+      tipo: this.tipo
     }).subscribe((response : any) => {
       this.paginacao = response
       this.noticias = this.paginacao.items
@@ -92,8 +98,13 @@ export class NoticiasComponent {
     })
   }
 
-  changePage(newPageNumber : number) {
-    this.paginacao.page = newPageNumber;
+  changePage(novaPagina : number) {
+    this.paginacao.page = novaPagina;
+    this.list()
+  }
+
+  changeNoticiaTipo(novoTipo : any) {
+    this.tipo = novoTipo
     this.list()
   }
 }

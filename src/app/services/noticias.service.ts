@@ -11,6 +11,6 @@ export class NoticiasService {
   ) { }
 
   list(filters: any)  {
-    return this.httpClient.get('http://servicodados.ibge.gov.br/api/v3/noticias?qtd=10&introsize=110&page='+filters.page);
+    return this.httpClient.get('http://servicodados.ibge.gov.br/api/v3/noticias?tipo='+filters.tipo+'&qtd=10&introsize=110&page='+filters.page);
   }
 }
