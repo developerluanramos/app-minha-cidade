@@ -15,16 +15,10 @@
       <small>{{ noticia.data_publicacao }}</small>
     </nz-card>
   </div>
-<!--  <div>-->
-<!--    <app-paginator-->
-<!--      [pagination]="paginacao"-->
-<!--      (changePage)="changePage(paginacao.page)"-->
-<!--    >-->
-<!--    </app-paginator>-->
-<!--  </div>-->
   <div nz-row [nzJustify]="'center'" [nzAlign]="'top'">
     <div nz-col nzSpan="24" nz-flex [nzJustify]="'center'" [nzAlign]="'center'">
       <nz-pagination
+        ngDefaultControl
         (nzPageIndexChange)="changePage($event)"
         [ngModel]="paginacao"
         [nzSimple]="false"

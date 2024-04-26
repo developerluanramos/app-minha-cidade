@@ -66,7 +66,9 @@ export class NoticiasComponent {
   public tipo: string = "noticia";
   public loading: boolean = true;
   public noticias : NoticiaInterface[] | undefined;
-  public paginacao: PaginationInterface = {};
+  public paginacao: PaginationInterface = {
+    page: 1
+  };
 
   constructor(
     private noticiasService: NoticiasService
@@ -74,7 +76,7 @@ export class NoticiasComponent {
   }
 
   ngOnInit() {
-    this.paginacao.page = 1
+    // this.paginacao.page = 1
     this.list()
   }
 
@@ -83,15 +85,15 @@ export class NoticiasComponent {
     this.noticiasService.list({
       page: this.paginacao.page,
       tipo: this.tipo
-    }).subscribe((response : any) => {
+    }).subscribe((response : PaginationInterface) => {
       this.paginacao = response
-      this.noticias = this.paginacao.items
+      this.noticias = response.items
       setTimeout(() => {this.loading = false}, 2000)
     })
   }
 
-  changePage(novaPagina: number | undefined) {
-    this.paginacao.page = novaPagina;
+  changePage(event: any) {
+    this.paginacao.page = event;
     this.list()
   }
 

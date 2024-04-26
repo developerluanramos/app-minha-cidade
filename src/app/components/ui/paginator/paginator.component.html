@@ -1,16 +1,11 @@
 <div>
-  <div nz-row [nzJustify]="'center'" [nzAlign]="'top'">
-    <div nz-col nzSpan="24" nz-flex [nzJustify]="'center'" [nzAlign]="'center'">
-      <nz-pagination
-        (nzPageIndexChange)="changePageEvent($event)"
-        [ngModel]="pagination"
-        [nzSimple]="false"
-        [nzSize]="'small'"
-        [nzResponsive]="true"
-        [nzPageIndex]="pagination.page"
-        [nzTotal]="50">
-      </nz-pagination>
-    </div>
-  </div>
+  <nz-pagination
+    (nzPageIndexChange)="changePageEvent($event)"
+    [ngModel]="pagination"
+    [nzSimple]="false"
+    [nzSize]="'small'"
+    [nzResponsive]="true"
+    [nzPageIndex]="pagination.page"
+    [nzTotal]="50">
+  </nz-pagination>
 </div>
-
