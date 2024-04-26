@@ -4,6 +4,7 @@ import {RouterModule} from "@angular/router";
 import {routes} from "./app.routes";
 import {PortalModule} from "./pages/portal/portal.module";
 import {HttpClientModule} from "@angular/common/http";
+import {NgApexchartsModule} from "ng-apexcharts";
 
 @NgModule({
   declarations: [],
@@ -11,7 +12,8 @@ import {HttpClientModule} from "@angular/common/http";
     CommonModule,
     HttpClientModule,
     RouterModule.forChild(routes),
-    PortalModule
+    PortalModule,
+    NgApexchartsModule
   ]
 })
 export class AppModule { }
