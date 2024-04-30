@@ -27,34 +27,34 @@ import {ApexChart, NgApexchartsModule} from "ng-apexcharts";
 export class ComparativoPaisesComponent {
   public series: any = [
     {
-      name: ["Saúde"],
-      data: [["Brasil", 55, 12], [22, 34, 12]]
+      name: "Brasil",
+      data: [28, 15, 11, 23]
     },
     {
-      name: ["Saúde"],
-      data: [["Brasil", 55, 10], [22, 34, 33]]
+      name: "EUA",
+      data: [12, 19, 22, 44]
     },
     {
-      name: ["Saúde"],
-      data: [["Brasil", 55, 9], [22, 34, 5]]
+      name: "México",
+      data: [5, 7, 9, 8]
+    },
+    {
+      name: "Canadá",
+      data: [3, 6, 12, 28]
     }
   ];
-  public xaxis : any = {
-    categories: [
-      "2016",
-      "2017",
-      // "Apr",
-      // "May",
-      // "Jun",
-      // "Jul",
-      // "Aug",
-      // "Sep",
-      // "Oct"
-    ]
+
+  public xaxis: any = {
+    categories: ["2016", "2017"],
+    title: {
+      text: "PERIODO"
+    }
   };
+
   public chart: ApexChart = {
-    type : 'bar'
+    type : 'line'
   };
+
   constructor(
     private http: HttpClient,
     private paisesService: PaisesService
@@ -63,15 +63,16 @@ export class ComparativoPaisesComponent {
 
   ngOnInit() : void {
     this.paisesService.listaPorIndicadores({}).subscribe((response: any) => {
-      // response.map((pais: any) => {
-      //   pais.series.map((serie : any) => {
-      //     console.log(serie)
-      //     this.series.push({
-      //       name: serie.pais.nome,
-      //       data: serie.serie
-      //     });
-      //   });
-      // })
+      console.log(response)
+      response.map((pais: any) => {
+        pais.series.map((serie : any) => {
+          console.log(serie)
+          // this.series.push({
+          //   name: serie.pais.nome,
+          //   data: serie.serie
+          // });
+        });
+      })
     });
   }
 }
