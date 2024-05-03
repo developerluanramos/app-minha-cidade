@@ -10,7 +10,7 @@ import {response} from "express";
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {PaisesService} from "../../../services/paises.service";
+import {PaisesService} from "../../../services/paises/paises.service";
 import {MalhaService} from "../../../services/malhas/malha.service";
 
 @Component({
