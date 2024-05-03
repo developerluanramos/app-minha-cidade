@@ -11,6 +11,6 @@ export class PaisesService {
   ) { }
 
   listaPorIndicadores(filters: any)  {
-    return this.httpClient.get('https://servicodados.ibge.gov.br/api/v1/paises/AR|BR/indicadores/77819|77820?periodo=2016,2017');
+    return this.httpClient.get('https://servicodados.ibge.gov.br/api/v1/paises/AR|BR|US|AD/indicadores/77819|77820?periodo=2016,2017,2018');
   }
 }

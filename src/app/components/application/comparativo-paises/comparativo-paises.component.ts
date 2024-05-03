@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
 import {NzIconDirective} from "ng-zorro-antd/icon";
 import {PaisesService} from "../../../services/paises.service";
+import {PaisesService as LocalidadePaisesService} from "../../../services/localidades/paises.service";
 import {ApexChart, NgApexchartsModule} from "ng-apexcharts";
 
 @Component({
@@ -25,54 +26,75 @@ import {ApexChart, NgApexchartsModule} from "ng-apexcharts";
   styleUrl: './comparativo-paises.component.scss'
 })
 export class ComparativoPaisesComponent {
+  public charts: any = []
   public series: any = [
-    {
-      name: "Brasil",
-      data: [28, 15, 11, 23]
-    },
-    {
-      name: "EUA",
-      data: [12, 19, 22, 44]
-    },
-    {
-      name: "México",
-      data: [5, 7, 9, 8]
-    },
-    {
-      name: "Canadá",
-      data: [3, 6, 12, 28]
-    }
-  ];
 
-  public xaxis: any = {
-    categories: ["2016", "2017"],
-    title: {
-      text: "PERIODO"
-    }
+  ];
+  chartOptions = {
+    series: [],
+    xaxis: {
+      categories: ['2016', '2017', '2018']
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '55%',
+        endingShape: 'rounded'
+      },
+    },
   };
 
-  public chart: ApexChart = {
-    type : 'line'
+  public chartX: ApexChart = {
+    type : 'bar',
+    height: 350
   };
 
   constructor(
     private http: HttpClient,
-    private paisesService: PaisesService
+    private paisesService: PaisesService,
+    private localidadePaisesService: LocalidadePaisesService
   ) {
   }
 
   ngOnInit() : void {
-    this.paisesService.listaPorIndicadores({}).subscribe((response: any) => {
+    this.localidadePaisesService.listAll().subscribe(response =>{
       console.log(response)
-      response.map((pais: any) => {
-        pais.series.map((serie : any) => {
-          console.log(serie)
-          // this.series.push({
-          //   name: serie.pais.nome,
-          //   data: serie.serie
-          // });
+    })
+    this.paisesService.listaPorIndicadores({}).subscribe((response: any) => {
+      // console.log(response[0])
+      response.forEach((element: any) => {
+        const seriesData: any = [];
+
+        element.series.forEach((country : any) => {
+          const countryName = country.pais.nome;
+          const countryData : any = [];
+
+          country.serie.forEach((yearData: any) => {
+            const year = Object.keys(yearData)[0];
+            const value = parseFloat(yearData[year]);
+            countryData.push(value);
+          });
+
+          seriesData.push({
+            name: countryName,
+            data: countryData
+          });
         });
-      })
+
+        this.charts.push({
+          series: seriesData,
+          xaxis: {
+            categories: ['2016', '2017', '2018']
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: '55%',
+              endingShape: 'rounded'
+            },
+          },
+        })
+      });
     });
   }
 }
