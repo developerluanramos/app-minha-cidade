@@ -19,6 +19,10 @@
             <span nz-icon nzType="desktop"></span>
             <span>Localidades</span>
           </li>
+          <li (click)="goToPage('/comparativos')" nz-menu-item>
+            <span nz-icon nzType="file"></span>
+            <span>File</span>
+          </li>
           <li nz-submenu nzTitle="User" nzIcon="user">
             <ul>
               <li nz-menu-item>Tom</li>
@@ -31,10 +35,6 @@
               <li nz-menu-item>Team 1</li>
               <li nz-menu-item>Team 2</li>
             </ul>
-          </li>
-          <li nz-menu-item>
-            <span nz-icon nzType="file"></span>
-            <span>File</span>
           </li>
         </ul>
       </nz-sider>

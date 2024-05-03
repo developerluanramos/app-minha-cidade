@@ -12,5 +12,10 @@ export const portalRoutes: Routes = [
     path: 'localidades',
     component: PortalComponent,
     loadChildren: () => import('./localidades/localidades.module').then((m) => m.LocalidadesModule),
+  },
+  {
+    path: 'comparativos',
+    component: PortalComponent,
+    loadChildren: () => import('./comparativos/comparativos.module').then((m) => m.ComparativosModule),
   }
 ];
