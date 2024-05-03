@@ -24,7 +24,6 @@ import {NzFlexDirective} from "ng-zorro-antd/flex";
 import {FormsModule} from "@angular/forms";
 import {NzSkeletonComponent} from "ng-zorro-antd/skeleton";
 import {NzRadioComponent, NzRadioGroupComponent} from "ng-zorro-antd/radio";
-import {PaginatorComponent} from "../../ui/paginator/paginator.component";
 
 @Component({
   selector: 'app-noticias',
@@ -56,8 +55,7 @@ import {PaginatorComponent} from "../../ui/paginator/paginator.component";
     FormsModule,
     NzSkeletonComponent,
     NzRadioGroupComponent,
-    NzRadioComponent,
-    PaginatorComponent
+    NzRadioComponent
   ],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.scss'

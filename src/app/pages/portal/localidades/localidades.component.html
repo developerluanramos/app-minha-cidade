@@ -1,23 +1,18 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
   <div nz-col class="gutter-row" nzSpan="6">
-    Menu de localidades
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
+    <label for="ufs">UFs</label>
+    <nz-select id="ufs" style="width: 100%" nzMode="multiple" nzPlaceHolder="Selecione Estados" [(ngModel)]="selectedUfs">
+      <nz-option
+        *ngFor="let uf of ufs"
+        [nzLabel]="uf.nome"
+        [nzValue]="uf"
+        [nzHide]="!isNotSelected(uf)"
+      ></nz-option>
+    </nz-select>
   </div>
   <div nz-col class="gutter-row" nzSpan="18">
-    Renderiza conteudo
-<!--    <br><br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
-<!--    <br><br><br><br><br><br>-->
+    <div class="ant-flex-align-center flex ant-row-center" style="align-content: center; justify-content: center">
+      <img [ngSrc]="malha" alt="" fill style="width: 650px; height: 650px; margin: auto; margin-top: 10px"/>
+    </div>
   </div>
 </div>
