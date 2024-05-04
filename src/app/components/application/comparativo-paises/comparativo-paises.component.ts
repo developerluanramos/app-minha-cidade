@@ -12,6 +12,7 @@ import {IndicadoresService} from "../../../services/paises/indicadores.service";
 import {IndicadorPaisesInterface} from "../../../models/indicador-paises.interface";
 import {PaisInterface} from "../../../models/pais.interface";
 import {NzTableComponent} from "ng-zorro-antd/table";
+import {NzCardComponent} from "ng-zorro-antd/card";
 
 @Component({
   selector: 'app-comparativo-paises',
@@ -28,7 +29,8 @@ import {NzTableComponent} from "ng-zorro-antd/table";
     NgOptimizedImage,
     NzColDirective,
     NzRowDirective,
-    NzTableComponent
+    NzTableComponent,
+    NzCardComponent
   ],
   templateUrl: './comparativo-paises.component.html',
   styleUrl: './comparativo-paises.component.scss'
