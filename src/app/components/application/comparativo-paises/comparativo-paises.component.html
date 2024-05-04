@@ -1,26 +1,12 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
   <div nz-col class="gutter-row" nzSpan="6">
-    <nz-divider nzOrientation="left" nzText="Selecione Países"></nz-divider>
-    <nz-select
-      id="ufs"
-      style="width: 100%"
-      nzMode="multiple"
-      nzPlaceHolder="Selecione Países"
-      (ngModelChange)="changePais($event)"
-      [(ngModel)]="selectecPaises">
-      <nz-option
-        *ngFor="let pais of paises"
-        [nzLabel]="pais.nome"
-        [nzValue]="pais"
-        [nzHide]="!paisIsNotSelected(pais)"
-      ></nz-option>
-    </nz-select>
     <nz-divider nzOrientation="left" nzText="Selecione Indicadores"></nz-divider>
     <nz-select
       id="indicadores"
       style="width: 100%"
       nzMode="multiple"
       nzPlaceHolder="Selecione Indicadores"
+      [nzAllowClear]="true"
       (ngModelChange)="changeIndicador($event)"
       [(ngModel)]="selectedIndicadores">
       <nz-option
@@ -30,10 +16,57 @@
         [nzHide]="!indicadorIsNotSelected(indicador)"
       ></nz-option>
     </nz-select>
+    <nz-divider nzOrientation="left" nzText="Selecione Países"></nz-divider>
+    <nz-select
+      id="ufs"
+      style="width: 100%"
+      nzMode="multiple"
+      nzPlaceHolder="Selecione Países"
+      [nzAllowClear]="true"
+      (ngModelChange)="changePais($event)"
+      [(ngModel)]="selectecPaises">
+      <nz-option
+        *ngFor="let pais of paises"
+        [nzLabel]="pais.nome"
+        [nzValue]="pais"
+        [nzHide]="!paisIsNotSelected(pais)"
+      ></nz-option>
+    </nz-select>
+    <nz-divider nzOrientation="left" nzText="Período"></nz-divider>
+    <nz-select
+      id="anos"
+      style="width: 100%"
+      nzMode="multiple"
+      nzPlaceHolder="Selecione o período"
+      [nzAllowClear]="true"
+      (ngModelChange)="changeAno($event)"
+      [(ngModel)]="selectedAnos">
+      <nz-option
+        *ngFor="let ano of anos"
+        [nzLabel]="ano"
+        [nzValue]="ano"
+        [nzHide]="!anoIsNotSelected(ano)"
+      ></nz-option>
+    </nz-select>
   </div>
   <div nz-col class="gutter-row" nzSpan="18">
     <nz-divider nzOrientation="left" nzText="Comparativos"></nz-divider>
+    <div *ngFor="let pais of selectecPaises">
+      <p>
+        <img [src]="'https://flagsapi.com/'+Object.values(pais.id)[1]+'/shiny/32.png'" alt="">
+        {{ pais.nome }}
+      </p>
+      <p>
+        {{ JSON.stringify(pais) }}
+      </p>
+    </div>
     <div id="chart" style="width: 100%; height: 400px;" *ngFor="let chart of charts">
+      <h3>{{chart.indicador.indicador}}</h3>
+      <small>
+        unidade: {{chart.indicador.unidade.id}}
+        | classe: {{chart.indicador.unidade.classe }}
+        | multiplicador: {{chart.indicador.unidade.multiplicador}}
+      </small>
       <apx-chart [series]="chart.series" [chart]="chartX" [xaxis]="chart.xaxis"></apx-chart>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {FormsModule} from "@angular/forms";
@@ -11,6 +11,7 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {IndicadoresService} from "../../../services/paises/indicadores.service";
 import {IndicadorPaisesInterface} from "../../../models/indicador-paises.interface";
 import {PaisInterface} from "../../../models/pais.interface";
+import {NzTableComponent} from "ng-zorro-antd/table";
 
 @Component({
   selector: 'app-comparativo-paises',
@@ -26,7 +27,8 @@ import {PaisInterface} from "../../../models/pais.interface";
     NgApexchartsModule,
     NgOptimizedImage,
     NzColDirective,
-    NzRowDirective
+    NzRowDirective,
+    NzTableComponent
   ],
   templateUrl: './comparativo-paises.component.html',
   styleUrl: './comparativo-paises.component.scss'
@@ -37,7 +39,8 @@ export class ComparativoPaisesComponent {
   public selectecPaises: PaisInterface[] = [];
   public indicadores: IndicadorPaisesInterface[] = [];
   public selectedIndicadores: IndicadorPaisesInterface[] = [];
-
+  public anos: number[] = [1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+  public selectedAnos: number[] = [];
   public chartX: ApexChart = {
     type : 'bar',
     height: 350
@@ -68,6 +71,15 @@ export class ComparativoPaisesComponent {
     this.listCharts();
   }
 
+  anoIsNotSelected(ano: number): boolean {
+    return this.selectedAnos.indexOf(ano) === -1;
+  }
+
+  changeAno(ano: any) {
+    this.selectedAnos = ano
+    this.listCharts();
+  }
+
   indicadorIsNotSelected(indicador: IndicadorPaisesInterface): boolean {
     return this.selectedIndicadores.indexOf(indicador) === -1;
   }
@@ -79,9 +91,13 @@ export class ComparativoPaisesComponent {
 
   listCharts() {
     this.charts = [];
+    if(this.selectedAnos.length > 0
+    && this.selectedIndicadores.length > 0
+    && this.selectecPaises.length > 0)
     this.paisesService.listaPorIndicadores({
       selectedPaises: this.selectecPaises,
-      selectedIndicadores: this.selectedIndicadores
+      selectedIndicadores: this.selectedIndicadores,
+      selectedAnos: this.selectedAnos
     }).subscribe((response: any) => {
       response.forEach((element: any) => {
         const seriesData: any = [];
@@ -103,9 +119,10 @@ export class ComparativoPaisesComponent {
         });
 
         this.charts.push({
+          indicador: element,
           series: seriesData,
           xaxis: {
-            categories: ['2016', '2017', '2018']
+            categories: this.selectedAnos
           },
           plotOptions: {
             bar: {
@@ -118,4 +135,7 @@ export class ComparativoPaisesComponent {
       });
     });
   }
+
+  protected readonly JSON = JSON;
+  protected readonly Object = Object;
 }

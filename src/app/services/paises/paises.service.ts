@@ -20,7 +20,10 @@ export class PaisesService {
     filters.selectedIndicadores.forEach((indicador: any) => {
       indicadoresIds.push(indicador.id)
     })
-    console.log('https://servicodados.ibge.gov.br/api/v1/paises/'+paisesIds.join('|')+'/indicadores/'+indicadoresIds.join('|')+'?periodo=2016,2017,2018')
-    return this.httpClient.get('https://servicodados.ibge.gov.br/api/v1/paises/'+paisesIds.join('|')+'/indicadores/'+indicadoresIds.join('|')+'?periodo=2016,2017,2018');
+
+    return this.httpClient.get(
+      'https://servicodados.ibge.gov.br/api/v1/paises/'
+        + paisesIds.join('|')+'/indicadores/'+indicadoresIds.join('|') + '?periodo='+filters.selectedAnos.join(','),
+    );
   }
 }
