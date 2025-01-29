@@ -1,6 +1,16 @@
-# AppMinhaCidade
+# 📍 App Minha Cidade  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+🚀 **An Angular application integrated with IBGE (Brazilian Institute of Geography and Statistics) to provide population data and insights about Brazilian cities.**  
+
+## 📌 Features  
+- 🔍 Search and retrieve population data for Brazilian cities  
+- 📊 Display statistical information from IBGE  
+- ⚡ Fast and responsive Angular-based UI  
+
+## 🛠️ Technologies Used  
+- **Angular** - Frontend framework  
+- **IBGE API** - Data source  
+- **Angular, TypeScript, HTML, CSS**  
 
 ## Development server
 
